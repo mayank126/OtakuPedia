@@ -1,0 +1,55 @@
+body{
+    background-color:rgb(240, 238, 238);
+}
+nav{
+    // position:absolute;
+    font-family: 'Architects Daughter',cursive;
+
+    background-color: black;
+
+    height:3rem;
+    // border-radius:5rem;
+    display: flex;
+    
+    // width:50rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-top:0;
+    
+    padding: 0.5rem;
+    header{
+        font-size:1.3rem;
+        padding: 0.5rem;
+        font-weight: 300;
+    
+        color:grey;
+        background-color:rgb(240, 238, 238);
+        border-radius:5rem;
+        strong{
+            color:black;
+            font-weight: 700; 
+        }
+    }
+    ul{
+        
+        display: flex;
+        list-style: none;
+        font-weight:bolder;
+        font-size:1.2rem;
+        .navItems{
+            text-decoration: none;
+            color:white;
+        }
+        li{
+            margin:2rem;
+            padding:0.5rem;
+            &:hover,&.active{
+                background-color:rgb(240, 238, 238);
+                color:black;
+                border-radius:2rem;
+                a{color:black;}
+            }
+            
+        }
+    }
+}

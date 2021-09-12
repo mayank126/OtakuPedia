@@ -1,0 +1,183 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Architects Daughter',cursive;
+}
+body{
+    background-color:rgb(240, 238, 238);
+}
+.db{
+    header{
+        text-align: center;
+        color:rgb(100, 99, 99);
+        font-weight: 700;
+        font-size:2rem;
+        margin-top:2rem;
+        strong{
+            color:black;
+        }
+    }
+}
+.container{
+    display: flex;
+    gap: 0.2rem;
+    aside
+    {
+        width:max-content;
+        margin-left:1rem;
+        .navhead{
+            margin-bottom: 1rem;
+            text-align:center;
+            font-size:2rem;
+            font-weight:700;
+        }
+        .topItems{
+            display:flex;
+            gap:2rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center;
+            .top-name{
+                
+                background-color:black;
+                color:grey;
+                width:100%;
+                font-size:1.5rem;
+                font-weight: 500;
+                padding:1rem;
+                text-align:center;
+                border-radius:1rem;
+            }
+        }
+    }
+    .main{
+        
+        display: flex;
+        flex-direction:column;
+        align-items:flex-end;
+        width: 80vw;
+        margin-left:0.5rem;    
+        margin-bottom:2rem;
+        .heading{
+            align-self:center;
+            margin-top:1rem;
+            font-size:2rem;
+            font-weight:500;
+            font-family:cursive;
+            color:black;
+        }
+            div
+            {
+                margin-left:1.5rem;
+            }
+            input
+            {
+
+                display:block;
+                appearance: none;
+                background: none;
+                outline:none;
+                border: black thin solid;
+                background-color:white;
+                border-radius:2rem;
+                padding:1rem;
+                font-weight: 300;
+                font-size:1.2rem;
+                text-align: center;
+                transition:0.4s linear;
+                &::placeholder
+                {
+                    color:black;
+                }
+                
+                &:focus, &:valid {
+                    background-color:black;
+                    color:gray;
+                }
+            }
+        
+        
+        .item-list{
+            align-self:center;
+            display: flex;
+			flex-wrap: wrap;
+            gap:0.5rem;
+			margin-top: 32px;
+			margin: 32px -8px 0px;
+            .card-container
+            {
+                width:20rem;
+                header
+                {
+                    width:18rem;
+                    text-align: center;
+                    color:black;
+                    font-weight:700;
+                    font-size:1.5rem;
+                    margin-top:0.5rem;
+                }
+                .card
+                {
+                    width:15rem;
+                    height:20rem;
+                    position:relative;
+                    transform-style: preserve-3d;
+                    transition:0.5s 0.1s ease-in;
+                    position:relative;
+                    .front
+                    {
+                        backface-visibility: hidden;
+                        width:15rem;
+                        height:20rem;
+                        position:absolute;
+                        img
+                        {
+                            width:15rem;
+                            height:20rem;
+                            border-radius:2rem;
+                        
+                        }
+                    }
+                    .back
+                    {   
+                        border-radius:2rem;
+                        backface-visibility: hidden;
+                        width:15rem;
+                        height:20rem;
+                        
+                        position:absolute;
+                        transform:rotateY(180deg);
+                        display:flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        background-color:grey;
+                        
+
+                    }
+                    &:hover
+                    {
+                        transform:rotateY(180deg) translateX(-2rem);
+                    }
+
+                }
+            }
+
+
+        }
+    }
+}
+.err{
+    align-self:center;
+    margin-top:1rem;
+    font-size:2rem;
+    font-weight:500;
+    margin-top:2rem;
+}
+.card-info
+{
+    font-size:1.5rem;
+    color:black;
+    font-weight:bolder;
+}
