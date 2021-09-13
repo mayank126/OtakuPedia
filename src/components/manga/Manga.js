@@ -9,30 +9,37 @@ const [topManga,setTopManga]=useState([]);
 const [manga,setManga]=useState([]);
 const[search,setSearch]=useState('');
 const [notFound,setNotFound]=useState(false);
-const fetchTop= async()=>{
-    const temp = await fetch('https://api.jikan.moe/v3/top/manga/1/manga').then(res=>res.json());
-    setTopManga(temp.top.slice(0,5));
+const [keyword,setKeyword]=useState('');
 
-}
-const fetchManga= async()=>{
-    setNotFound(false);
-    setManga([]);
-    const temp= await fetch(`https://api.jikan.moe/v3/search/manga?q=${search.toLowerCase()}&order_by=title&sort=asc&limit=10`).then(res=>res.json());
-    
-    if(temp.type==='BadResponseException')
-    { 
-        setNotFound(true);
-    }
-    else
-    setManga(temp.results);
-
-  }
   useEffect(() =>{
-    fetchTop();
+    const controller = new AbortController();
+    fetch('https://api.jikan.moe/v3/top/manga/1/manga',{signal : controller.signal})
+    .then(res=>res.json())
+    .then(data=>setTopManga(data.top.slice(0,5)));
+    return ()=>controller.abort();
   },[])
+
+  useEffect(() =>{
+    if(keyword!=='')
+    {
+      setNotFound(false);
+      setManga([]);
+      const controller=new AbortController();
+      fetch(`https://api.jikan.moe/v3/search/manga?q=${keyword.toLowerCase()}&order_by=title&sort=asc&limit=10`,{signal:controller.signal})
+      .then(res=>res.json())
+      .then(data=>{
+        if(data.type==='BadResponseException')
+          setNotFound(true);
+        else
+          setManga(data.results);
+      });
+      return ()=>controller.abort();
+    }
+  },[keyword]);
+
   const handleSearch= e=>{
     e.preventDefault();
-    fetchManga(search);
+    setKeyword(search);
   }
   
   return (

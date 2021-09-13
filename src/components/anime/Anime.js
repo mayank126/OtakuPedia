@@ -8,27 +8,36 @@ function Anime() {
   const [anime,setAnime]=useState([]);
   const[search,setSearch]=useState('');
   const [notFound,setNotFound]=useState(false);
-  const fetchTop= async()=>{
-    const temp = await fetch('https://api.jikan.moe/v3/top/anime/1/bypopularity').then(res=>res.json());
-    setTopAnime(temp.top.slice(0,5));
+  const [keyword,setKeyword]=useState('');
 
-  }
-  const fetchAnime= async()=>{
-    setNotFound(false);
-    setAnime([]);
-    const temp= await fetch(`https://api.jikan.moe/v3/search/anime?q=${search.toLowerCase()}&order_by=title&sort=asc&limit=10`).then(res=>res.json());
-    if(temp.type==='BadResponseException')
-      setNotFound(true);
-    else
-      setAnime(temp.results);
-
-  }
   useEffect(() =>{
-    fetchTop();
+    const controller = new AbortController();
+    fetch('https://api.jikan.moe/v3/top/anime/1/bypopularity',{signal : controller.signal})
+    .then(res=>res.json())
+    .then(data=>setTopAnime(data.top.slice(0,5)));
+    return ()=>controller.abort();
   },[])
+  useEffect( ()=>{
+    if(keyword!=='')
+    {
+      setNotFound(false);
+      setAnime([]);
+      const controller = new AbortController();
+      fetch(`https://api.jikan.moe/v3/search/anime?q=${keyword.toLowerCase()}&order_by=title&sort=asc&limit=10`,{signal : controller.signal})
+      .then(res=>res.json())
+      .then(data=>{ 
+        if(data.type==='BadResponseException')
+          setNotFound(true);
+        else
+            setAnime(data.results);
+      });
+      return ()=>controller.abort();
+    }
+  },[keyword])
+
   const handleSearch= e=>{
     e.preventDefault();
-    fetchAnime(search);
+    setKeyword(search);
   }
   
   return (
